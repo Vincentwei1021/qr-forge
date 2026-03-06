@@ -75,6 +75,7 @@ export default function QRGenerator() {
 
   return (
     <section id="generator" className="px-4 py-12 sm:px-6 sm:py-16">
+      <h2 className="sr-only">QR Code Generator Tool</h2>
       <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-2">
         {/* Controls */}
         <div className="space-y-6">
@@ -209,7 +210,7 @@ export default function QRGenerator() {
                 className="flex items-center justify-center [&>svg]:max-h-[280px] [&>svg]:max-w-full"
               />
             ) : qrDataUrl ? (
-              <img src={qrDataUrl} alt="Generated QR Code" className="max-h-[280px] max-w-full" />
+              <img src={qrDataUrl} alt="Generated QR Code preview" className="max-h-[280px] max-w-full" />
             ) : (
               <p className="text-sm text-gray-400">Your QR code will appear here</p>
             )}
