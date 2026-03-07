@@ -4,7 +4,7 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://qr-forge.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://qr.toolboxlite.com";
 
 export const metadata: Metadata = {
   title: "Free QR Code Generator Online — Create Custom QR Codes | QR Forge",

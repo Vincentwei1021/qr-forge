@@ -17,7 +17,8 @@ export async function POST(req: NextRequest) {
     const apiKey = process.env.TOOLBOX_API_KEY;
     if (apiKey) {
       try {
-        const res = await fetch("https://api.sendtoclaw.com/v1/qr", {
+        const TOOLBOX_URL = process.env.TOOLBOX_API_URL || "http://localhost:3100";
+        const res = await fetch(`${TOOLBOX_URL}/v1/qr`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -46,7 +46,7 @@ const webAppSchema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   name: "QR Forge",
-  url: "https://qr-forge.vercel.app",
+  url: "https://qr.toolboxlite.com",
   description:
     "Free online QR code generator. Create custom QR codes with colors, sizes, and formats. Download PNG or SVG instantly — no sign-up required.",
   applicationCategory: "UtilityApplication",
