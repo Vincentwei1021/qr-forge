@@ -1,27 +1,49 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Blog | QR Forge",
-  description: "Tips, guides, and news about QR codes and how to use them effectively.",
+  description: "Tips, guides, and best practices for creating and using QR codes effectively in business and personal projects.",
+  alternates: { canonical: "/blog" },
 };
+
+const posts = [
+  {
+    slug: "qr-codes-for-business",
+    title: "5 Creative Ways to Use QR Codes for Your Business in 2026",
+    excerpt: "Discover five practical ways businesses are using QR codes — from contactless menus to social media funnels. Create yours free with QR Forge.",
+    date: "2026-03-10",
+  },
+  {
+    slug: "qr-code-best-practices",
+    title: "QR Code Best Practices: Size, Contrast, and Testing Guide",
+    excerpt: "Learn the essential best practices for creating QR codes that reliably scan in real-world conditions — covering minimum size, contrast, error correction, and testing.",
+    date: "2026-03-08",
+  },
+];
 
 export default function BlogPage() {
   return (
     <>
       <Header />
-      <main className="flex min-h-[60vh] items-center justify-center px-4 py-16">
-        <div className="text-center">
-          <div className="mb-4 inline-block rounded-full bg-indigo-100 px-4 py-1.5 text-sm font-semibold text-indigo-600">
-            Coming Soon
+      <main className="px-4 py-12 sm:px-6 sm:py-16">
+        <div className="mx-auto max-w-3xl">
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Blog</h1>
+          <p className="mt-2 text-gray-600">Tips and guides on QR codes for business and personal use.</p>
+          <div className="mt-10 space-y-8">
+            {posts.map((post) => (
+              <article key={post.slug} className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
+                <time className="text-xs font-medium text-gray-400">{post.date}</time>
+                <h2 className="mt-2 text-xl font-bold text-gray-900">
+                  <Link href={`/blog/${post.slug}`} className="hover:text-indigo-600">{post.title}</Link>
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-gray-600">{post.excerpt}</p>
+                <Link href={`/blog/${post.slug}`} className="mt-3 inline-block text-sm font-semibold text-indigo-600 hover:text-indigo-700">Read more →</Link>
+              </article>
+            ))}
           </div>
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            QR Forge Blog
-          </h1>
-          <p className="mt-3 text-lg text-gray-600">
-            Guides, tips, and best practices for QR codes. Stay tuned!
-          </p>
         </div>
       </main>
       <Footer />
