@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { MessageSquare, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -31,14 +30,13 @@ export default function FeedbackWidget() {
 
   return (
     <>
-      <Button
+      <button
         onClick={() => setOpen(!open)}
         aria-label="Send feedback"
-        size="icon"
-        className="fixed bottom-5 right-5 z-50 h-11 w-11 rounded-full shadow-lg"
+        className="fixed bottom-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105 active:scale-95"
       >
-        {open ? <X className="h-4 w-4" /> : <MessageSquare className="h-4 w-4" />}
-      </Button>
+        {open ? <X className="h-5 w-5" /> : <MessageSquare className="h-5 w-5" />}
+      </button>
 
       {open && (
         <Card className="fixed bottom-20 right-5 z-50 w-80 animate-fade-in shadow-xl">
@@ -67,13 +65,13 @@ export default function FeedbackWidget() {
                   className="mt-2"
                 />
                 {status === "error" && <p className="mt-2 text-xs text-destructive">Something went wrong. Try again.</p>}
-                <Button
+                <button
                   type="submit"
                   disabled={status === "loading" || !message.trim()}
-                  className="mt-3 w-full"
+                  className="mt-3 w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:pointer-events-none disabled:opacity-50"
                 >
                   {status === "loading" ? "Sending..." : "Send Feedback"}
-                </Button>
+                </button>
               </form>
             )}
           </CardContent>

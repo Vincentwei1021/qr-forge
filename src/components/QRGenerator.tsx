@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 export default function QRGenerator() {
@@ -105,8 +104,8 @@ export default function QRGenerator() {
               <Label>Format</Label>
               <Tabs value={format} onValueChange={(v) => setFormat(v as "png" | "svg")}>
                 <TabsList className="w-full">
-                  <TabsTrigger value="png" className="flex-1">PNG</TabsTrigger>
-                  <TabsTrigger value="svg" className="flex-1">SVG</TabsTrigger>
+                  <TabsTrigger value="png" className="flex-1 py-2.5">PNG</TabsTrigger>
+                  <TabsTrigger value="svg" className="flex-1 py-2.5">SVG</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
@@ -181,15 +180,14 @@ export default function QRGenerator() {
             </div>
 
             {/* Download button */}
-            <Button
-              size="lg"
-              className="w-full active:scale-[0.98] transition-all"
+            <button
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50"
               onClick={handleDownload}
               disabled={!qrDataUrl && !qrSvg}
             >
-              <Download className="mr-2 h-4 w-4" />
+              <Download className="h-4 w-4" />
               Download {format.toUpperCase()}
-            </Button>
+            </button>
           </CardContent>
         </Card>
 
