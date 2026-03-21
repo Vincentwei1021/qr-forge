@@ -5,7 +5,7 @@ import HowTo from "@/components/HowTo";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 
-/* ── FAQ data (shared between component + JSON-LD) ── */
+/* -- FAQ data (shared between component + JSON-LD) -- */
 const faqItems = [
   {
     q: "What is a QR code?",
@@ -41,7 +41,7 @@ const faqItems = [
   },
 ];
 
-/* ── JSON-LD: WebApplication ── */
+/* -- JSON-LD: WebApplication -- */
 const webAppSchema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
@@ -53,10 +53,10 @@ const webAppSchema = {
   operatingSystem: "Any",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   browserRequirements: "Requires a modern web browser",
-  aggregateRating: undefined, // placeholder – add when reviews are available
+  aggregateRating: undefined,
 };
 
-/* ── JSON-LD: FAQPage ── */
+/* -- JSON-LD: FAQPage -- */
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -70,7 +70,7 @@ const faqSchema = {
   })),
 };
 
-/* ── JSON-LD: HowTo ── */
+/* -- JSON-LD: HowTo -- */
 const howToSchema = {
   "@context": "https://schema.org",
   "@type": "HowTo",
@@ -101,34 +101,34 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main className="animate-fade-in">
         <Hero />
         <QRGenerator />
         <HowTo />
         <FAQ items={faqItems} />
 
-        {/* About — keyword-rich section */}
-        <section className="px-4 py-12 sm:px-6 sm:py-16">
+        {/* About */}
+        <section className="px-4 py-16 sm:px-6 sm:py-24">
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900">
+            <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
               About QR Forge
             </h2>
-            <div className="mt-4 space-y-4 text-gray-600 leading-relaxed text-left sm:text-center">
+            <div className="mt-4 space-y-4 text-sm leading-relaxed text-muted-foreground text-left sm:text-center">
               <p>
-                <strong>QR Forge</strong> is a <strong>free QR code generator</strong> built for
+                <strong className="text-foreground">QR Forge</strong> is a <strong className="text-foreground">free QR code generator</strong> built for
                 speed and privacy. Whether you need a QR code for a URL, email, Wi-Fi
-                credentials, or plain text, our <strong>online QR code maker</strong> handles it
+                credentials, or plain text, our <strong className="text-foreground">online QR code maker</strong> handles it
                 all — right in your browser.
               </p>
               <p>
                 Unlike other QR code generators that require sign-ups or subscriptions, QR Forge
-                is <strong>100% free with no limits</strong>. Every QR code is generated locally
+                is <strong className="text-foreground">100% free with no limits</strong>. Every QR code is generated locally
                 on your device, which means your data never leaves your browser. No tracking, no
                 server storage, no compromises.
               </p>
               <p>
-                Export your QR codes as high-resolution <strong>PNG</strong> files for digital use
-                or <strong>SVG</strong> vector files for flawless printing at any scale. Customize
+                Export your QR codes as high-resolution <strong className="text-foreground">PNG</strong> files for digital use
+                or <strong className="text-foreground">SVG</strong> vector files for flawless printing at any scale. Customize
                 colors, adjust margins, and choose sizes from 100px to 1000px — all with real-time
                 preview.
               </p>

@@ -1,11 +1,11 @@
 import FeedbackWidget from "@/components/FeedbackWidget";
+import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "next-themes";
 import Script from "next/script";
 import type { Metadata } from "next";
-import { Inter, Geist } from "next/font/google";
-import "./globals.css";
+import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -54,19 +54,22 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   other: {
-    "theme-color": "#6366f1",
+    "theme-color": "#18181b",
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5881105388002876" crossOrigin="anonymous" strategy="afterInteractive" />
       </head>
-      <body className={`${inter.variable} font-sans antialiased bg-white text-gray-900`}>
-        {children}
-        <FeedbackWidget />
+      <body className={cn(inter.variable, "font-sans antialiased")}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          {children}
+          <FeedbackWidget />
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

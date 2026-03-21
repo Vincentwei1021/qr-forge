@@ -2,6 +2,14 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import QRCode from "qrcode";
+import { Download } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 export default function QRGenerator() {
   const [text, setText] = useState("https://example.com");
@@ -78,132 +86,118 @@ export default function QRGenerator() {
       <h2 className="sr-only">QR Code Generator Tool</h2>
       <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-2">
         {/* Controls */}
-        <div className="space-y-6">
-          {/* Text input */}
-          <div>
-            <label htmlFor="qr-text" className="mb-1.5 block text-sm font-medium text-gray-700">
-              URL or Text
-            </label>
-            <input
-              id="qr-text"
-              type="text"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              placeholder="https://example.com"
-              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 shadow-sm transition-colors focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
-            />
-          </div>
-
-          {/* Format toggle */}
-          <div>
-            <span className="mb-1.5 block text-sm font-medium text-gray-700">Format</span>
-            <div className="flex rounded-lg border border-gray-300 p-0.5">
-              {(["png", "svg"] as const).map((f) => (
-                <button
-                  key={f}
-                  onClick={() => setFormat(f)}
-                  className={`flex-1 rounded-md px-4 py-2 text-sm font-medium transition-all ${
-                    format === f
-                      ? "bg-indigo-500 text-white shadow-sm"
-                      : "text-gray-600 hover:text-gray-900"
-                  }`}
-                >
-                  {f.toUpperCase()}
-                </button>
-              ))}
+        <Card>
+          <CardContent className="space-y-6 p-6">
+            {/* Text input */}
+            <div className="space-y-2">
+              <Label htmlFor="qr-text">URL or Text</Label>
+              <Input
+                id="qr-text"
+                type="text"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                placeholder="https://example.com"
+              />
             </div>
-          </div>
 
-          {/* Colors */}
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label htmlFor="dark-color" className="mb-1.5 block text-sm font-medium text-gray-700">
-                Foreground
-              </label>
-              <div className="flex items-center gap-2">
-                <input
-                  id="dark-color"
-                  type="color"
-                  value={darkColor}
-                  onChange={(e) => setDarkColor(e.target.value)}
-                  className="h-10 w-10 cursor-pointer rounded border border-gray-300"
-                />
-                <span className="text-sm text-gray-500">{darkColor}</span>
+            {/* Format toggle */}
+            <div className="space-y-2">
+              <Label>Format</Label>
+              <Tabs value={format} onValueChange={(v) => setFormat(v as "png" | "svg")}>
+                <TabsList className="w-full">
+                  <TabsTrigger value="png" className="flex-1">PNG</TabsTrigger>
+                  <TabsTrigger value="svg" className="flex-1">SVG</TabsTrigger>
+                </TabsList>
+              </Tabs>
+            </div>
+
+            {/* Colors */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="dark-color">Foreground</Label>
+                <div className="flex items-center gap-2">
+                  <input
+                    id="dark-color"
+                    type="color"
+                    value={darkColor}
+                    onChange={(e) => setDarkColor(e.target.value)}
+                    className="h-9 w-9 cursor-pointer rounded-md border border-input bg-transparent"
+                  />
+                  <span className="text-sm text-muted-foreground">{darkColor}</span>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="light-color">Background</Label>
+                <div className="flex items-center gap-2">
+                  <input
+                    id="light-color"
+                    type="color"
+                    value={lightColor}
+                    onChange={(e) => setLightColor(e.target.value)}
+                    className="h-9 w-9 cursor-pointer rounded-md border border-input bg-transparent"
+                  />
+                  <span className="text-sm text-muted-foreground">{lightColor}</span>
+                </div>
               </div>
             </div>
-            <div>
-              <label htmlFor="light-color" className="mb-1.5 block text-sm font-medium text-gray-700">
-                Background
-              </label>
-              <div className="flex items-center gap-2">
-                <input
-                  id="light-color"
-                  type="color"
-                  value={lightColor}
-                  onChange={(e) => setLightColor(e.target.value)}
-                  className="h-10 w-10 cursor-pointer rounded border border-gray-300"
-                />
-                <span className="text-sm text-gray-500">{lightColor}</span>
+
+            {/* Size slider */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="qr-size">Size</Label>
+                <span className="text-sm text-muted-foreground">{width}px</span>
+              </div>
+              <Slider
+                id="qr-size"
+                min={100}
+                max={1000}
+                step={50}
+                value={[width]}
+                onValueChange={(v) => setWidth(Array.isArray(v) ? v[0] : v)}
+              />
+              <div className="flex justify-between text-xs text-muted-foreground">
+                <span>100px</span>
+                <span>1000px</span>
               </div>
             </div>
-          </div>
 
-          {/* Size slider */}
-          <div>
-            <label htmlFor="qr-size" className="mb-1.5 block text-sm font-medium text-gray-700">
-              Size: {width}px
-            </label>
-            <input
-              id="qr-size"
-              type="range"
-              min={100}
-              max={1000}
-              step={50}
-              value={width}
-              onChange={(e) => setWidth(Number(e.target.value))}
-              className="w-full accent-indigo-500"
-            />
-            <div className="flex justify-between text-xs text-gray-400">
-              <span>100px</span>
-              <span>1000px</span>
+            {/* Margin slider */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="qr-margin">Margin</Label>
+                <span className="text-sm text-muted-foreground">{margin}</span>
+              </div>
+              <Slider
+                id="qr-margin"
+                min={0}
+                max={20}
+                value={[margin]}
+                onValueChange={(v) => setMargin(Array.isArray(v) ? v[0] : v)}
+              />
+              <div className="flex justify-between text-xs text-muted-foreground">
+                <span>0</span>
+                <span>20</span>
+              </div>
             </div>
-          </div>
 
-          {/* Margin slider */}
-          <div>
-            <label htmlFor="qr-margin" className="mb-1.5 block text-sm font-medium text-gray-700">
-              Margin: {margin}
-            </label>
-            <input
-              id="qr-margin"
-              type="range"
-              min={0}
-              max={20}
-              value={margin}
-              onChange={(e) => setMargin(Number(e.target.value))}
-              className="w-full accent-indigo-500"
-            />
-            <div className="flex justify-between text-xs text-gray-400">
-              <span>0</span>
-              <span>20</span>
-            </div>
-          </div>
-
-          {/* Download button */}
-          <button
-            onClick={handleDownload}
-            disabled={!qrDataUrl && !qrSvg}
-            className="w-full rounded-lg bg-indigo-500 px-6 py-3 text-base font-semibold text-white shadow-sm transition-all hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            Download {format.toUpperCase()}
-          </button>
-        </div>
+            {/* Download button */}
+            <Button
+              size="lg"
+              className="w-full active:scale-[0.98] transition-all"
+              onClick={handleDownload}
+              disabled={!qrDataUrl && !qrSvg}
+            >
+              <Download className="mr-2 h-4 w-4" />
+              Download {format.toUpperCase()}
+            </Button>
+          </CardContent>
+        </Card>
 
         {/* Preview */}
         <div className="flex flex-col items-center justify-center">
-          <div className="flex min-h-[320px] w-full items-center justify-center rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 p-6">
+          <Card className="flex min-h-[320px] w-full items-center justify-center p-6">
             {error ? (
-              <p className="text-sm text-red-500">{error}</p>
+              <p className="text-sm text-destructive">{error}</p>
             ) : format === "svg" && qrSvg ? (
               <div
                 dangerouslySetInnerHTML={{ __html: qrSvg }}
@@ -212,23 +206,23 @@ export default function QRGenerator() {
             ) : qrDataUrl ? (
               <img src={qrDataUrl} alt="Generated QR Code preview" className="max-h-[280px] max-w-full" />
             ) : (
-              <p className="text-sm text-gray-400">Your QR code will appear here</p>
+              <p className="text-sm text-muted-foreground">Your QR code will appear here</p>
             )}
-          </div>
+          </Card>
           <canvas ref={canvasRef} className="hidden" />
         </div>
       </div>
 
       {/* Batch generation teaser */}
-      <div className="mx-auto mt-12 max-w-5xl rounded-xl border border-indigo-100 bg-indigo-50/50 p-6 text-center">
-        <div className="mb-2 inline-block rounded-full bg-indigo-100 px-3 py-1 text-xs font-semibold text-indigo-600">
-          Coming Soon
-        </div>
-        <h3 className="text-lg font-semibold text-gray-900">Batch QR Code Generation</h3>
-        <p className="mt-1 text-sm text-gray-600">
-          Generate hundreds of QR codes at once from a CSV file. Upload, customize, and download a ZIP.
-        </p>
-      </div>
+      <Card className="mx-auto mt-12 max-w-5xl">
+        <CardContent className="p-6 text-center">
+          <Badge variant="secondary" className="mb-2">Coming Soon</Badge>
+          <h3 className="text-base font-semibold text-foreground">Batch QR Code Generation</h3>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Generate hundreds of QR codes at once from a CSV file. Upload, customize, and download a ZIP.
+          </p>
+        </CardContent>
+      </Card>
     </section>
   );
 }
