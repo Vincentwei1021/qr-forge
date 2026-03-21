@@ -33,7 +33,7 @@ export default function FeedbackWidget() {
       <button
         onClick={() => setOpen(!open)}
         aria-label="Send feedback"
-        className="fixed bottom-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105 active:scale-95"
+        className="fixed bottom-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-brand text-brand-foreground shadow-lg transition-transform hover:scale-105 active:scale-95"
       >
         {open ? <X className="h-5 w-5" /> : <MessageSquare className="h-5 w-5" />}
       </button>
@@ -68,7 +68,7 @@ export default function FeedbackWidget() {
                 <button
                   type="submit"
                   disabled={status === "loading" || !message.trim()}
-                  className="mt-3 w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:pointer-events-none disabled:opacity-50"
+                  className="mt-3 w-full rounded-lg bg-brand px-4 py-2.5 text-sm font-medium text-brand-foreground transition-colors hover:brightness-110 disabled:pointer-events-none disabled:opacity-50"
                 >
                   {status === "loading" ? "Sending..." : "Send Feedback"}
                 </button>

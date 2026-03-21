@@ -29,7 +29,7 @@ export default function QrCodesForBusiness() {
       <Header />
       <main className="animate-fade-in px-4 py-12 sm:px-6 sm:py-16">
         <article className="mx-auto max-w-3xl">
-          <Link href="/blog" className="text-sm text-muted-foreground hover:text-foreground hover:underline">&larr; Back to Blog</Link>
+          <Link href="/blog" className="text-sm text-muted-foreground hover:text-brand hover:underline">&larr; Back to Blog</Link>
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             5 Creative Ways to Use QR Codes for Your Business in 2026
           </h1>
@@ -40,7 +40,7 @@ export default function QrCodesForBusiness() {
               QR codes have evolved far beyond their origins as inventory management tools. In 2026, businesses of every size — from solo freelancers to enterprise brands — are using QR codes to bridge the physical and digital worlds. If you&apos;re not already using them strategically, you&apos;re leaving engagement on the table.
             </p>
             <p>
-              The good news: creating a custom QR code takes less than a minute with a free tool like <Link href="/" className="font-medium text-foreground underline underline-offset-4 hover:text-foreground/80">QR Forge</Link>. Here are five smart ways to put them to work for your business.
+              The good news: creating a custom QR code takes less than a minute with a free tool like <Link href="/" className="font-medium text-brand underline underline-offset-4 hover:text-brand/80">QR Forge</Link>. Here are five smart ways to put them to work for your business.
             </p>
 
             <h2 className="text-xl font-bold text-foreground sm:text-2xl">1. Contactless Menus and Product Information</h2>
@@ -61,7 +61,7 @@ export default function QrCodesForBusiness() {
               QR codes on product packaging can link to setup guides, warranty registration, safety information, or customer support. Luxury brands and pharmaceutical companies also use them for authentication — a unique QR code per product batch lets customers verify they have a genuine item.
             </p>
             <p>
-              For static product information, a simple QR code linking to a dedicated landing page works perfectly. Generate yours in seconds with <Link href="/" className="font-medium text-foreground underline underline-offset-4 hover:text-foreground/80">QR Forge</Link> — no account required.
+              For static product information, a simple QR code linking to a dedicated landing page works perfectly. Generate yours in seconds with <Link href="/" className="font-medium text-brand underline underline-offset-4 hover:text-brand/80">QR Forge</Link> — no account required.
             </p>
 
             <h2 className="text-xl font-bold text-foreground sm:text-2xl">4. Event Check-In and Ticketing</h2>
@@ -82,7 +82,7 @@ export default function QrCodesForBusiness() {
 
             <h2 className="text-xl font-bold text-foreground sm:text-2xl">Getting Started</h2>
             <p>
-              All of these use cases start the same way: create a free custom QR code. With <Link href="/" className="font-medium text-foreground underline underline-offset-4 hover:text-foreground/80">QR Forge</Link>, you can generate a custom-colored QR code and download it as PNG or SVG in under a minute — no sign-up, no limits, and no watermark.
+              All of these use cases start the same way: create a free custom QR code. With <Link href="/" className="font-medium text-brand underline underline-offset-4 hover:text-brand/80">QR Forge</Link>, you can generate a custom-colored QR code and download it as PNG or SVG in under a minute — no sign-up, no limits, and no watermark.
             </p>
             <p>
               Once you have your QR code, test it with multiple devices before printing at scale. A quick check on both iPhone and Android camera apps ensures it works for all your customers.
@@ -92,7 +92,7 @@ export default function QrCodesForBusiness() {
               <CardContent className="p-5">
                 <p className="font-semibold text-foreground">Ready to create your QR code?</p>
                 <p className="mt-1 text-muted-foreground">
-                  <Link href="/" className="font-medium underline underline-offset-4 hover:text-foreground">QR Forge</Link> is free, requires no sign-up, and lets you customize colors and download in PNG or SVG format.
+                  <Link href="/" className="font-medium underline underline-offset-4 hover:text-brand">QR Forge</Link> is free, requires no sign-up, and lets you customize colors and download in PNG or SVG format.
                 </p>
               </CardContent>
             </Card>

@@ -1,6 +1,11 @@
+"use client";
+
 import { Type, Palette, Download } from "lucide-react";
+import { useScrollFadeIn } from "@/hooks/useScrollFadeIn";
 
 export default function HowTo() {
+  const sectionRef = useScrollFadeIn();
+
   const steps = [
     {
       icon: Type,
@@ -20,7 +25,7 @@ export default function HowTo() {
   ];
 
   return (
-    <section className="px-4 py-16 sm:px-6 sm:py-24">
+    <section ref={sectionRef} className="scroll-fade-in px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-4xl">
         <h2 className="text-center text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
           How to Create a QR Code Online — Free &amp; Fast
@@ -29,10 +34,14 @@ export default function HowTo() {
           Generate a custom QR code in three simple steps with our free QR code maker.
         </p>
         <div className="mt-12 grid gap-8 sm:grid-cols-3">
-          {steps.map((s) => (
-            <div key={s.title} className="text-center">
-              <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-muted">
-                <s.icon className="h-5 w-5 text-foreground" />
+          {steps.map((s, i) => (
+            <div
+              key={s.title}
+              className="group text-center transition-transform duration-300 hover:-translate-y-1"
+              style={{ animationDelay: `${i * 100}ms` }}
+            >
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-muted transition-colors duration-300 group-hover:bg-brand/15">
+                <s.icon className="h-5 w-5 text-brand" />
               </div>
               <h3 className="text-sm font-semibold text-foreground">{s.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>

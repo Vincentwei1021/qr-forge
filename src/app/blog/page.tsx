@@ -42,7 +42,7 @@ export default function BlogPage() {
                     <Link href={`/blog/${post.slug}`} className="hover:underline">{post.title}</Link>
                   </h2>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{post.excerpt}</p>
-                  <Link href={`/blog/${post.slug}`} className="mt-3 inline-block text-sm font-medium text-foreground hover:underline">
+                  <Link href={`/blog/${post.slug}`} className="mt-3 inline-block text-sm font-medium text-brand hover:underline">
                     Read more &rarr;
                   </Link>
                 </CardContent>

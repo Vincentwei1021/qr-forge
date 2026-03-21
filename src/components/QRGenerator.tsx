@@ -20,8 +20,10 @@ export default function QRGenerator() {
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
   const [qrSvg, setQrSvg] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [qrKey, setQrKey] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const [downloading, setDownloading] = useState(false);
 
   const generateQR = useCallback(async () => {
     if (!text.trim()) {
@@ -50,6 +52,7 @@ export default function QRGenerator() {
         setQrDataUrl(url);
         setQrSvg("");
       }
+      setQrKey((k) => k + 1);
     } catch {
       setError("Failed to generate QR code. Check your input.");
     }
@@ -64,6 +67,7 @@ export default function QRGenerator() {
   }, [generateQR]);
 
   const handleDownload = () => {
+    setDownloading(true);
     if (format === "svg" && qrSvg) {
       const blob = new Blob([qrSvg], { type: "image/svg+xml" });
       const url = URL.createObjectURL(blob);
@@ -78,6 +82,7 @@ export default function QRGenerator() {
       a.download = "qr-forge.png";
       a.click();
     }
+    setTimeout(() => setDownloading(false), 600);
   };
 
   return (
@@ -85,7 +90,7 @@ export default function QRGenerator() {
       <h2 className="sr-only">QR Code Generator Tool</h2>
       <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-2">
         {/* Controls */}
-        <Card>
+        <Card className="transition-shadow duration-300 hover:shadow-lg hover:shadow-brand/5">
           <CardContent className="space-y-6 p-6">
             {/* Text input */}
             <div className="space-y-2">
@@ -96,6 +101,7 @@ export default function QRGenerator() {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 placeholder="https://example.com"
+                className="focus:border-brand focus:ring-brand/30"
               />
             </div>
 
@@ -104,8 +110,8 @@ export default function QRGenerator() {
               <Label>Format</Label>
               <Tabs value={format} onValueChange={(v) => setFormat(v as "png" | "svg")}>
                 <TabsList className="w-full">
-                  <TabsTrigger value="png" className="flex-1 min-h-[44px]">PNG</TabsTrigger>
-                  <TabsTrigger value="svg" className="flex-1 min-h-[44px]">SVG</TabsTrigger>
+                  <TabsTrigger value="png" className="flex-1 min-h-[44px] data-active:text-brand">PNG</TabsTrigger>
+                  <TabsTrigger value="svg" className="flex-1 min-h-[44px] data-active:text-brand">SVG</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
@@ -120,7 +126,7 @@ export default function QRGenerator() {
                     type="color"
                     value={darkColor}
                     onChange={(e) => setDarkColor(e.target.value)}
-                    className="h-9 w-9 cursor-pointer rounded-md border border-input bg-transparent"
+                    className="h-9 w-9 cursor-pointer rounded-md border border-input bg-transparent transition-shadow hover:ring-2 hover:ring-brand/20"
                   />
                   <span className="text-sm text-muted-foreground">{darkColor}</span>
                 </div>
@@ -133,7 +139,7 @@ export default function QRGenerator() {
                     type="color"
                     value={lightColor}
                     onChange={(e) => setLightColor(e.target.value)}
-                    className="h-9 w-9 cursor-pointer rounded-md border border-input bg-transparent"
+                    className="h-9 w-9 cursor-pointer rounded-md border border-input bg-transparent transition-shadow hover:ring-2 hover:ring-brand/20"
                   />
                   <span className="text-sm text-muted-foreground">{lightColor}</span>
                 </div>
@@ -144,7 +150,7 @@ export default function QRGenerator() {
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <Label htmlFor="qr-size">Size</Label>
-                <span className="text-sm text-muted-foreground">{width}px</span>
+                <span className="text-sm font-medium text-brand">{width}px</span>
               </div>
               <Slider
                 id="qr-size"
@@ -164,7 +170,7 @@ export default function QRGenerator() {
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <Label htmlFor="qr-margin">Margin</Label>
-                <span className="text-sm text-muted-foreground">{margin}</span>
+                <span className="text-sm font-medium text-brand">{margin}</span>
               </div>
               <Slider
                 id="qr-margin"
@@ -181,7 +187,7 @@ export default function QRGenerator() {
 
             {/* Download button */}
             <button
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50"
+              className={`flex w-full items-center justify-center gap-2 rounded-lg bg-brand px-6 py-3 text-sm font-medium text-brand-foreground shadow-sm transition-all hover:brightness-110 active:scale-[0.97] disabled:pointer-events-none disabled:opacity-50 ${downloading ? "animate-pulse-ring" : ""}`}
               onClick={handleDownload}
               disabled={!qrDataUrl && !qrSvg}
             >
@@ -193,16 +199,22 @@ export default function QRGenerator() {
 
         {/* Preview */}
         <div className="flex flex-col items-center justify-center">
-          <Card className="flex min-h-[320px] w-full items-center justify-center p-6">
+          <Card className="flex min-h-[320px] w-full items-center justify-center p-6 transition-shadow duration-300 hover:shadow-lg hover:shadow-brand/5">
             {error ? (
               <p className="text-sm text-destructive">{error}</p>
             ) : format === "svg" && qrSvg ? (
               <div
+                key={qrKey}
                 dangerouslySetInnerHTML={{ __html: qrSvg }}
-                className="flex items-center justify-center [&>svg]:max-h-[280px] [&>svg]:max-w-full"
+                className="animate-qr-appear flex items-center justify-center [&>svg]:max-h-[280px] [&>svg]:max-w-full"
               />
             ) : qrDataUrl ? (
-              <img src={qrDataUrl} alt="Generated QR Code preview" className="max-h-[280px] max-w-full" />
+              <img
+                key={qrKey}
+                src={qrDataUrl}
+                alt="Generated QR Code preview"
+                className="animate-qr-appear max-h-[280px] max-w-full"
+              />
             ) : (
               <p className="text-sm text-muted-foreground">Your QR code will appear here</p>
             )}
@@ -212,9 +224,9 @@ export default function QRGenerator() {
       </div>
 
       {/* Batch generation teaser */}
-      <Card className="mx-auto mt-12 max-w-5xl">
+      <Card className="mx-auto mt-12 max-w-5xl border-brand/10 bg-brand-muted transition-shadow duration-300 hover:shadow-md hover:shadow-brand/5">
         <CardContent className="p-6 text-center">
-          <Badge variant="secondary" className="mb-2">Coming Soon</Badge>
+          <Badge className="mb-2 border-brand/20 bg-brand/10 text-brand">Coming Soon</Badge>
           <h3 className="text-base font-semibold text-foreground">Batch QR Code Generation</h3>
           <p className="mt-1 text-sm text-muted-foreground">
             Generate hundreds of QR codes at once from a CSV file. Upload, customize, and download a ZIP.

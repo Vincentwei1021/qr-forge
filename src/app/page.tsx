@@ -111,7 +111,7 @@ export default function Home() {
         <section className="px-4 py-16 sm:px-6 sm:py-24">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-              About QR Forge
+              About <span className="text-brand">QR Forge</span>
             </h2>
             <div className="mt-4 space-y-4 text-sm leading-relaxed text-muted-foreground text-left sm:text-center">
               <p>

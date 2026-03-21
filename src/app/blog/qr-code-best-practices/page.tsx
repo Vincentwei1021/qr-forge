@@ -29,7 +29,7 @@ export default function QrCodeBestPractices() {
       <Header />
       <main className="animate-fade-in px-4 py-12 sm:px-6 sm:py-16">
         <article className="mx-auto max-w-3xl">
-          <Link href="/blog" className="text-sm text-muted-foreground hover:text-foreground hover:underline">&larr; Back to Blog</Link>
+          <Link href="/blog" className="text-sm text-muted-foreground hover:text-brand hover:underline">&larr; Back to Blog</Link>
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             QR Code Best Practices: Size, Contrast, and Testing Guide
           </h1>
@@ -48,7 +48,7 @@ export default function QrCodeBestPractices() {
               A practical formula: <strong className="text-foreground">minimum size = scan distance ÷ 10</strong>. For a sign scanned from 1 meter away, your QR code should be at least 10 cm × 10 cm.
             </p>
             <p>
-              When printing, always download your QR code as an SVG file from <Link href="/" className="font-medium text-foreground underline underline-offset-4 hover:text-foreground/80">QR Forge</Link>. SVG is vector-based, so it scales to any size without the pixelation that ruins small PNG prints.
+              When printing, always download your QR code as an SVG file from <Link href="/" className="font-medium text-brand underline underline-offset-4 hover:text-brand/80">QR Forge</Link>. SVG is vector-based, so it scales to any size without the pixelation that ruins small PNG prints.
             </p>
 
             <h2 className="text-xl font-bold text-foreground sm:text-2xl">Contrast Is Non-Negotiable</h2>
@@ -112,7 +112,7 @@ export default function QrCodeBestPractices() {
               <CardContent className="p-5">
                 <p className="font-semibold text-foreground">Create your QR code the right way</p>
                 <p className="mt-1 text-muted-foreground">
-                  <Link href="/" className="font-medium underline underline-offset-4 hover:text-foreground">QR Forge</Link> generates free custom QR codes with PNG and SVG download options. No sign-up required.
+                  <Link href="/" className="font-medium underline underline-offset-4 hover:text-brand">QR Forge</Link> generates free custom QR codes with PNG and SVG download options. No sign-up required.
                 </p>
               </CardContent>
             </Card>
