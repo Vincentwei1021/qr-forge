@@ -22,7 +22,7 @@ export default function FAQ({ items }: { items: FAQItem[] }) {
         <Accordion className="w-full">
           {items.map((faq, i) => (
             <AccordionItem key={i} value={`item-${i}`}>
-              <AccordionTrigger className="text-left text-sm font-medium sm:text-base">
+              <AccordionTrigger className="text-left text-sm font-medium py-5 sm:text-base">
                 {faq.q}
               </AccordionTrigger>
               <AccordionContent className="text-sm leading-relaxed text-muted-foreground">

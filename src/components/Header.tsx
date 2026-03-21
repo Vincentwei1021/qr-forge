@@ -42,7 +42,7 @@ export default function Header() {
           <ThemeToggle />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
-              render={<Button variant="ghost" size="icon" className="h-9 w-9" aria-label="Open menu" />}
+              render={<Button variant="ghost" size="icon" className="h-11 w-11" aria-label="Open menu" />}
             >
               <Menu className="h-4 w-4" />
             </SheetTrigger>

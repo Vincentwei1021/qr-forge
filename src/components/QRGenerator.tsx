@@ -104,8 +104,8 @@ export default function QRGenerator() {
               <Label>Format</Label>
               <Tabs value={format} onValueChange={(v) => setFormat(v as "png" | "svg")}>
                 <TabsList className="w-full">
-                  <TabsTrigger value="png" className="flex-1 py-2.5">PNG</TabsTrigger>
-                  <TabsTrigger value="svg" className="flex-1 py-2.5">SVG</TabsTrigger>
+                  <TabsTrigger value="png" className="flex-1 min-h-[44px]">PNG</TabsTrigger>
+                  <TabsTrigger value="svg" className="flex-1 min-h-[44px]">SVG</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>

@@ -10,27 +10,27 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} QR Forge
           </p>
           <nav className="flex flex-wrap items-center justify-center gap-1 text-sm text-muted-foreground">
-            <Link href="/" className="rounded-md px-3 py-2 transition-colors hover:text-foreground">
+            <Link href="/" className="rounded-md px-3 py-3 transition-colors hover:text-foreground">
               Home
             </Link>
             <Separator orientation="vertical" className="h-4 hidden sm:block" />
-            <Link href="/#generator" className="rounded-md px-3 py-2 transition-colors hover:text-foreground">
+            <Link href="/#generator" className="rounded-md px-3 py-3 transition-colors hover:text-foreground">
               Generator
             </Link>
             <Separator orientation="vertical" className="h-4 hidden sm:block" />
-            <Link href="/#faq" className="rounded-md px-3 py-2 transition-colors hover:text-foreground">
+            <Link href="/#faq" className="rounded-md px-3 py-3 transition-colors hover:text-foreground">
               FAQ
             </Link>
             <Separator orientation="vertical" className="h-4 hidden sm:block" />
-            <Link href="/blog" className="rounded-md px-3 py-2 transition-colors hover:text-foreground">
+            <Link href="/blog" className="rounded-md px-3 py-3 transition-colors hover:text-foreground">
               Blog
             </Link>
             <Separator orientation="vertical" className="h-4 hidden sm:block" />
-            <Link href="/privacy" className="rounded-md px-3 py-2 transition-colors hover:text-foreground">
+            <Link href="/privacy" className="rounded-md px-3 py-3 transition-colors hover:text-foreground">
               Privacy
             </Link>
             <Separator orientation="vertical" className="h-4 hidden sm:block" />
-            <Link href="/terms" className="rounded-md px-3 py-2 transition-colors hover:text-foreground">
+            <Link href="/terms" className="rounded-md px-3 py-3 transition-colors hover:text-foreground">
               Terms
             </Link>
           </nav>
