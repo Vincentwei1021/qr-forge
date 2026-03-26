@@ -4,6 +4,7 @@ import QRGenerator from "@/components/QRGenerator";
 import HowTo from "@/components/HowTo";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
+import { headers } from "next/headers";
 
 /* -- FAQ data (shared between component + JSON-LD) -- */
 const faqItems = [
@@ -41,63 +42,52 @@ const faqItems = [
   },
 ];
 
-/* -- JSON-LD: WebApplication -- */
-const webAppSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  name: "QR Forge",
-  url: "https://qr.toolboxlite.com",
-  description:
-    "Free online QR code generator. Create custom QR codes with colors, sizes, and formats. Download PNG or SVG instantly — no sign-up required.",
-  applicationCategory: "UtilityApplication",
-  operatingSystem: "Any",
-  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-  browserRequirements: "Requires a modern web browser",
-  aggregateRating: undefined,
-};
+/* -- JSON-LD schemas are generated dynamically in Home() -- */
 
-/* -- JSON-LD: FAQPage -- */
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqItems.map((item) => ({
-    "@type": "Question",
-    name: item.q,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.a,
-    },
-  })),
-};
+export default async function Home() {
+  const headersList = await headers();
+  const host = headersList.get("host") || "qr.toolboxlite.com";
+  const siteUrl =
+    host === "toolboxlite.com" || host === "www.toolboxlite.com"
+      ? "https://toolboxlite.com"
+      : "https://qr.toolboxlite.com";
 
-/* -- JSON-LD: HowTo -- */
-const howToSchema = {
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  name: "How to Create a Free QR Code Online",
-  description:
-    "Follow these simple steps to generate a custom QR code for free using QR Forge.",
-  step: [
-    {
-      "@type": "HowToStep",
-      name: "Enter your content",
-      text: "Type or paste a URL, text, email address, or any content you want to encode into the input field.",
-    },
-    {
-      "@type": "HowToStep",
-      name: "Customize your QR code",
-      text: "Choose between PNG or SVG format, pick custom foreground and background colors, and adjust the size and margin.",
-    },
-    {
-      "@type": "HowToStep",
-      name: "Download your QR code",
-      text: "Click the Download button to save your QR code. It's generated instantly in your browser — no server upload needed.",
-    },
-  ],
-  tool: { "@type": "HowToTool", name: "QR Forge — Free QR Code Generator" },
-};
+  const webAppSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "QR Forge",
+    url: siteUrl,
+    description:
+      "Free online QR code generator. Create custom QR codes with colors, sizes, and formats. Download PNG or SVG instantly — no sign-up required.",
+    applicationCategory: "UtilityApplication",
+    operatingSystem: "Any",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    browserRequirements: "Requires a modern web browser",
+  };
 
-export default function Home() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  };
+
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: "How to Create a Free QR Code Online",
+    description: "Follow these simple steps to generate a custom QR code for free using QR Forge.",
+    step: [
+      { "@type": "HowToStep", name: "Enter your content", text: "Type or paste a URL, text, email address, or any content you want to encode into the input field." },
+      { "@type": "HowToStep", name: "Customize your QR code", text: "Choose between PNG or SVG format, pick custom foreground and background colors, and adjust the size and margin." },
+      { "@type": "HowToStep", name: "Download your QR code", text: "Click the Download button to save your QR code. It's generated instantly in your browser — no server upload needed." },
+    ],
+    tool: { "@type": "HowToTool", name: "QR Forge — Free QR Code Generator" },
+  };
+
   return (
     <>
       <Header />

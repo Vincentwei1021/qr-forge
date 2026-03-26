@@ -1,6 +1,16 @@
 import type { MetadataRoute } from "next";
-export default function sitemap(): MetadataRoute.Sitemap {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://qr.toolboxlite.com";
+import { headers } from "next/headers";
+
+export const dynamic = "force-dynamic";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const headersList = await headers();
+  const host = headersList.get("host") || "qr.toolboxlite.com";
+  const base =
+    host === "toolboxlite.com" || host === "www.toolboxlite.com"
+      ? "https://toolboxlite.com"
+      : "https://qr.toolboxlite.com";
+
   return [
     { url: base, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
     { url: `${base}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
