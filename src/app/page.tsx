@@ -1,3 +1,4 @@
+import AdBanner from "@/components/AdBanner";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import QRGenerator from "@/components/QRGenerator";
@@ -93,6 +94,7 @@ export default async function Home() {
       <Header />
       <main className="animate-fade-in">
         <Hero />
+        <AdBanner className="mx-auto max-w-5xl px-4 py-4" />
         <QRGenerator />
         <HowTo />
         <FAQ items={faqItems} />
@@ -125,6 +127,7 @@ export default async function Home() {
             </div>
           </div>
         </section>
+        <AdBanner className="mx-auto max-w-5xl px-4 py-6" />
       </main>
       <Footer />
 
